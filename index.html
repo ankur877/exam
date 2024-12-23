@@ -141,11 +141,11 @@
 
             <div id="nameQuestion" class="question">
                 <label id="nameLabel"></label>
-                <input type="text" id="nameField" placeholder="" disabled>
+                <input type="text" id="nameField" name="name" placeholder="" disabled>
             </div>
 
             <label id="phoneLabel" style="display: none;"></label>
-            <input type="number" id="phoneNumber" placeholder="" style="display: none;" />
+            <input type="number" id="phoneNumber" name="phone" placeholder="" style="display: none;" />
 
             <label for="department">Department ki tumar ?</label>
             <input type="text" id="department" name="department" placeholder="ko sn" required disabled>
@@ -161,7 +161,7 @@
 
             <div id="feedbackQuestion" class="question">
                 <label id="feedbackLabel"></label>
-                <textarea id="feedbackField" placeholder="hi"></textarea>
+                <textarea id="feedbackField" name="feedback" placeholder="hi"></textarea>
             </div>
 
             <div id="motivationalMessage" class="feedback-message" style="display: none;">
@@ -202,8 +202,8 @@
         function enableFields() {
             nameQuestion.classList.add("show");
             nameField.disabled = false;
-            department.disabled = false;  // Enable department field
-            semester.disabled = false;    // Enable semester field
+            department.disabled = false;
+            semester.disabled = false;
             studyQuestion.classList.add("show");
             studyQuestion.querySelectorAll("input").forEach(radio => radio.disabled = false);
             submitButton.disabled = false;
