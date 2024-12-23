@@ -148,10 +148,10 @@
             <input type="number" id="phoneNumber" placeholder="" style="display: none;" />
 
             <label for="department">Department ki tumar ?</label>
-            <input type="text" id="department" placeholder="ko sn" required disabled>
+            <input type="text" id="department" name="department" placeholder="ko sn" required disabled>
 
             <label for="semester">Kuntu semester t tumi ?</label>
-            <input type="text" id="semester" placeholder="um kuntut nu ?" required disabled>
+            <input type="text" id="semester" name="semester" placeholder="um kuntut nu ?" required disabled>
 
             <div id="studyQuestion" class="question">
                 <label id="studyLabel"></label>
@@ -165,7 +165,7 @@
             </div>
 
             <div id="motivationalMessage" class="feedback-message" style="display: none;">
-                Aww borhiya, te inke ee time waste kori thaka tumi ! At first etu ko sn kya porha nai nu Dhunu tumi ?! Ghorar ghah to katba jo nai da tumi!! Eta kotha jani tho College pai ako dangar manuh ho nai tumi ! jodi val CGPA napo sob borbad !!! Ako nai da ji hol xei to hol ee, porha ita tindin ase majot, aramse val korba parba result ! Best Wishes for the Exam<span> 💙</span>
+                Aww borhiya, te inke ee time waste kori thaka tumi ! At first etu ko sn kya porha nai nu Dhunu tumi ?! Ghorar ghah to katba jo nai da tumi!! Eta kotha jani tho College pai ako dangar m[...]
             </div>
 
             <button type="submit" disabled>Submit</button>
@@ -202,8 +202,8 @@
         function enableFields() {
             nameQuestion.classList.add("show");
             nameField.disabled = false;
-            department.disabled = false;
-            semester.disabled = false;
+            department.disabled = false;  // Enable department field
+            semester.disabled = false;    // Enable semester field
             studyQuestion.classList.add("show");
             studyQuestion.querySelectorAll("input").forEach(radio => radio.disabled = false);
             submitButton.disabled = false;
@@ -264,7 +264,7 @@
         studiedInputs.forEach(input => {
             input.addEventListener("change", () => {
                 if (input.value === "yes") {
-                    feedbackLabel.textContent = "Borhiya!! First of all THANK YOU mok ekhni time diar karone. Mok kiba advice/motivation diba niki exam r karone ? Ba kiba beleg kotha o jodi koba khujo koba paro...";
+                    feedbackLabel.textContent = "Borhiya!! First of all THANK YOU mok ekhni time diar karone. Mok kiba advice/motivation diba niki exam r karone ? Ba kiba beleg kotha o jodi koba khujo[...]
                     feedbackField.placeholder = "koi dia, mon tu val lagbo";
                     feedbackQuestion.classList.add("show");
                     motivationalMessage.style.display = "none";
