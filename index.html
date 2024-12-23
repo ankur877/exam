@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khobor Loisu Da Ekbar Sobore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(121, 228, 240);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px 30px;
+            border: 5px solid #ccc; /* Add this line to create a thin border */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+            font-size: 1.8em;
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: bold;
+            background-color: yellow;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .thank-you {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 5em;
+            font-weight: bold;
+            color: red;
+            background-color: rgb(195, 87, 235);
+            animation: fly 7s infinite;
+        }
+
+        @keyframes fly {
+            0%, 100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 1em;
+            color: #fff;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.reset {
+            background: #dc3545;
+        }
+
+        .alert {
+            color: red;
+            font-size: 0.9em;
+            margin-left: 10px;
+            font-weight: bold;
+            display: inline;
+            background-color: yellow;
+            padding: 2px 5px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback-message {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .feedback-message span {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1><span class="highlight">Khobor Loisu Da Ekbar Sobore</span></h1>
+        <form id="feedbackForm" action="https://formspree.io/f/myzzylzv" method="POST">
+            <label for="gender">Da ko sn ita</label> 
+            <br>                
+            <p>Tumar Gender tu- <span id="genderAlert" class="alert">Please select your gender first.</span></p>
+            <input type="radio" name="gender" value="male" required> Male <br>
+            <input type="radio" name="gender" value="female"> Female<br>
+            <input type="radio" name="gender" value="other"> Duiotar major tu<br>
+            <input type="radio" name="gender" value="Ei tintar bade o kiba ase jodi xetu"> Ei tintar bade o kiba ase jodi xetu<br>
+
+            <div id="nameQuestion" class="question">
+                <label id="nameLabel"></label>
+                <input type="text" id="nameField" placeholder="" disabled>
+            </div>
+
+            <label id="phoneLabel" style="display: none;"></label>
+            <input type="number" id="phoneNumber" placeholder="" style="display: none;" />
+
+            <label for="department">Department ki tumar ?</label>
+            <input type="text" id="department" placeholder="ko sn" required disabled>
+
+            <label for="semester">Kuntu semester t tumi ?</label>
+            <input type="text" id="semester" placeholder="um kuntut nu ?" required disabled>
+
+            <div id="studyQuestion" class="question">
+                <label id="studyLabel"></label>
+                <input type="radio" name="studied" value="yes" required disabled> Yes<br>
+                <input type="radio" name="studied" value="no" disabled> No<br>
+            </div>
+
+            <div id="feedbackQuestion" class="question">
+                <label id="feedbackLabel"></label>
+                <textarea id="feedbackField" placeholder="hi"></textarea>
+            </div>
+
+            <div id="motivationalMessage" class="feedback-message" style="display: none;">
+                Aww borhiya, te inke ee time waste kori thaka tumi ! At first etu ko sn kya porha nai nu Dhunu tumi ?! Ghorar ghah to katba jo nai da tumi!! Eta kotha jani tho College pai ako dangar manuh ho nai tumi ! jodi val CGPA napo sob borbad !!! Ako nai da ji hol xei to hol ee, porha ita tindin ase majot, aramse val korba parba result ! Best Wishes for the Exam<span> 💙</span>
+            </div>
+
+            <button type="submit" disabled>Submit</button>
+            <button type="button" class="reset" onclick="resetForm()">Reset</button>
+        </form>
+    </div>
+
+    <div id="thankYou" class="thank-you" style="display: none;">THANK YOU</div>
+
+    <script>
+        const genderInputs = document.getElementsByName("gender");
+        const nameQuestion = document.getElementById("nameQuestion");
+        const nameLabel = document.getElementById("nameLabel");
+        const nameField = document.getElementById("nameField");
+        const phoneLabel = document.getElementById("phoneLabel");
+        const phoneNumber = document.getElementById("phoneNumber");
+
+        const department = document.getElementById("department");
+        const semester = document.getElementById("semester");
+        const studyQuestion = document.getElementById("studyQuestion");
+        const studyLabel = document.getElementById("studyLabel");
+
+        const feedbackQuestion = document.getElementById("feedbackQuestion");
+        const feedbackLabel = document.getElementById("feedbackLabel");
+        const feedbackField = document.getElementById("feedbackField");
+
+        const adviceQuestion = document.getElementById("adviceQuestion");
+        const adviceField = document.getElementById("adviceField");
+
+        const motivationalMessage = document.getElementById("motivationalMessage");
+        const submitButton = document.querySelector("button[type='submit']");
+        const genderAlert = document.getElementById("genderAlert");
+
+        function enableFields() {
+            nameQuestion.classList.add("show");
+            nameField.disabled = false;
+            department.disabled = false;
+            semester.disabled = false;
+            studyQuestion.classList.add("show");
+            studyQuestion.querySelectorAll("input").forEach(radio => radio.disabled = false);
+            submitButton.disabled = false;
+            genderAlert.style.display = "none";
+        }
+
+        function showGenderAlert() {
+            genderAlert.style.display = "inline";
+        }
+
+        function hideGenderAlert() {
+            genderAlert.style.display = "none";
+        }
+
+        function validateGenderSelection(e) {
+            const isGenderSelected = Array.from(genderInputs).some(input => input.checked);
+            if (!isGenderSelected) {
+                e.preventDefault();
+                showGenderAlert();
+            } else {                
+                hideGenderAlert();
+            }
+        }
+
+        genderInputs.forEach(input => {
+            input.addEventListener("change", () => {
+                enableFields();
+                switch (input.value) {
+                    case "male":
+                        nameLabel.textContent = "Bapa tumak manuhe ki buli jane ?";
+                        studyLabel.textContent = "Porhiso naa babu tumi exam r karone ?";
+                        phoneLabel.textContent = "Phone number tu da ha dhon tumar:";
+                        phoneLabel.style.display = "block";
+                        phoneNumber.style.display = "block";
+                        phoneNumber.placeholder = "Di da, Single e tumio kijani. ako nai rati adda dim Whatsapp t !";
+                        phoneNumber.required = true;
+                        break;
+                    case "female":
+                        nameLabel.textContent = "Aai tumar thouga nam tu ki ?";
+                        studyLabel.textContent = "Porhiso naa Maina tumi exam r karone ?";
+                        phoneLabel.textContent = "Maina Phone number tu da ha tumar:";
+                        phoneLabel.style.display = "block";
+                        phoneNumber.style.display = "block";
+                        phoneNumber.placeholder = "Di da, rati adda dim Whatsapp t !";
+                        phoneNumber.required = true;
+                        break;
+                    default:
+                        nameLabel.textContent = "Tumar xubho naam tu ki ?";
+                        studyLabel.textContent = "Porhiso na ?";
+                        phoneLabel.style.display = "none";
+                        phoneNumber.style.display = "none";
+                        phoneNumber.required = false;
+                }
+            });
+        });
+
+        const studiedInputs = document.getElementsByName("studied");
+        studiedInputs.forEach(input => {
+            input.addEventListener("change", () => {
+                if (input.value === "yes") {
+                    feedbackLabel.textContent = "Borhiya!! First of all THANK YOU mok ekhni time diar karone. Mok kiba advice/motivation diba niki exam r karone ? Ba kiba beleg kotha o jodi koba khujo koba paro...";
+                    feedbackField.placeholder = "koi dia, mon tu val lagbo";
+                    feedbackQuestion.classList.add("show");
+                    motivationalMessage.style.display = "none";
+                    adviceQuestion.classList.add("show");
+                } else {
+                    feedbackQuestion.classList.remove("show");
+                    motivationalMessage.style.display = "block";
+                    adviceQuestion.classList.remove("show");
+                }
+            });
+        });
+
+        function resetForm() {
+            document.getElementById("feedbackForm").reset();
+            nameQuestion.classList.remove("show");
+            nameField.disabled = true;
+            department.disabled = true;
+            semester.disabled = true;
+            studyQuestion.classList.remove("show");
+            studyQuestion.querySelectorAll("input").forEach(radio => radio.disabled = true);
+            feedbackQuestion.classList.remove("show");
+            motivationalMessage.style.display = "none";
+            adviceQuestion.classList.remove("show");
+            submitButton.disabled = true;
+            hideGenderAlert();
+        }
+
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+            validateGenderSelection(event);
+            if (!event.defaultPrevented) {
+                const phoneNumberValue = phoneNumber.value;
+                if (phoneNumberValue && phoneNumberValue.length !== 10) {
+                    alert("Phone number must be 10 digits.");
+                    event.preventDefault();
+                } else {
+                    document.getElementById("thankYou").style.display = "block";
+                    setTimeout(() => {
+                        document.getElementById("thankYou").style.display = "none";
+                    }, 4000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
